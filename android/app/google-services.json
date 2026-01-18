@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "411595408555",
+    "project_id": "ustagram-2f50c",
+    "storage_bucket": "ustagram-2f50c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:411595408555:android:c4f64df1da92366315e3ee",
+        "android_client_info": {
+          "package_name": "com.example.instagram"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "411595408555-gag9nk2sh8nq763rqblpbke7mbhta9ui.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnHDAu6NArWtmYtbtdLieLolxOTs3ZAxM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "411595408555-gag9nk2sh8nq763rqblpbke7mbhta9ui.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
