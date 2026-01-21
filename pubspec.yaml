@@ -38,6 +38,8 @@ dependencies:
   firebase_core: ^4.3.0
   cloud_firestore: ^6.1.1
   shared_preferences: ^2.5.3
+  image_picker: ^1.2.1
+  firebase_storage: ^13.0.6
 
 dev_dependencies:
   flutter_test:
@@ -67,6 +69,10 @@ flutter:
      - assets/uzbek.png
      - assets/russian.png
      - assets/logo.png
+     - assets/cr7.jpg
+     - assets/messi.jpg
+     - assets/neymar.jpg
+     - assets/bape.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

@@ -944,19 +944,16 @@ class _Register5State extends State<Register5> {
     try{
       // firebase'ga saqlash
       FireBaseService service = FireBaseService();
-      final result = await service.register(gmail, password);
+      final result = await service.register(gmail, password, dob, fullName, username);
 
       // sharedpref'ga ulash
       SharedPreferences preferences = await SharedPreferences.getInstance();
-      await preferences.setString("fullName", fullName);
-      await preferences.setString("dob", dob);
-      await preferences.setString("username", username);
       await preferences.setBool("isAuthenticated", true);
 
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => FeedPage(user: result)
+          builder: (context) => FeedPage()
         )
       );
     } on FirebaseAuthException catch(e){
@@ -966,6 +963,15 @@ class _Register5State extends State<Register5> {
             "${textlar[currentIndex]["errorcha"]}"
           )
         )
+      );
+    }
+    catch(e){
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              content: Text(
+                  "${textlar[currentIndex]["errorcha"]}"
+              )
+          )
       );
     }
   }
