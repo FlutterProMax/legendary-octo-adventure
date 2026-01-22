@@ -275,7 +275,8 @@ class _FeedPageState extends State<FeedPage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
 
       bottomNavigationBar: BottomAppBar(
-        height: 60,
+        color: Colors.grey.shade300,
+        height: 67,
         shape: CircularNotchedRectangle(),
         notchMargin: 10,
         child: Container(
