@@ -210,7 +210,7 @@ class _ReelsPageState extends State<ReelsPage> {
                     // like
                     Icon(
                       Icons.thumb_up,
-                      size: 35,
+                      size: 28,
                       color: Colors.white,
                     ),
                     Text(
@@ -227,7 +227,7 @@ class _ReelsPageState extends State<ReelsPage> {
                     // dislike
                     Icon(
                       Icons.thumb_down,
-                      size: 35,
+                      size: 28,
                       color: Colors.white,
                     ),
 
@@ -237,7 +237,7 @@ class _ReelsPageState extends State<ReelsPage> {
                     // comment
                     Icon(
                       Icons.add_comment,
-                      size: 35,
+                      size: 28,
                       color: Colors.white,
                     ),
                     Text(
@@ -254,7 +254,7 @@ class _ReelsPageState extends State<ReelsPage> {
                     // share
                     Icon(
                       Icons.share,
-                      size: 35,
+                      size: 28,
                       color: Colors.white,
                     ),
                   ],

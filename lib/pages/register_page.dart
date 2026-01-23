@@ -351,131 +351,134 @@ class _RegisterPageState extends State<RegisterPage> {
         ],
       ),
 
-      body: Padding(
-        padding: const EdgeInsets.all(18.0),
-        child: Column(
-          children: [
-            Expanded(
-              child: Column(
-                children: [
-                  // gmail
-                  Text(
-                    "${textlar[currentIndex]["email_question"]}",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 30
+      body: SingleChildScrollView(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+        child: Padding(
+          padding: const EdgeInsets.all(18.0),
+          child: Column(
+            children: [
+              Expanded(
+                child: Column(
+                  children: [
+                    // gmail
+                    Text(
+                      "${textlar[currentIndex]["email_question"]}",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30
+                      ),
                     ),
-                  ),
 
-                  SizedBox(height: 10,),
+                    SizedBox(height: 10,),
 
-                  // tushuntirish
-                  Text(
-                      "${textlar[currentIndex]["email_explain"]}",
-                    style: TextStyle(
-                      fontSize: 19,
-                      color: Colors.grey.shade800
+                    // tushuntirish
+                    Text(
+                        "${textlar[currentIndex]["email_explain"]}",
+                      style: TextStyle(
+                        fontSize: 19,
+                        color: Colors.grey.shade800
+                      ),
                     ),
-                  ),
 
-                  SizedBox(height: 25,),
+                    SizedBox(height: 25,),
 
-                  // input
-                  TextField(
-                    controller: _emailController,
-                    decoration: InputDecoration(
-                      hintText: textlar[currentIndex]["email_hint"],
-                      labelText: textlar[currentIndex]["email_label"],
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15)
+                    // input
+                    TextField(
+                      controller: _emailController,
+                      decoration: InputDecoration(
+                        hintText: textlar[currentIndex]["email_hint"],
+                        labelText: textlar[currentIndex]["email_label"],
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15)
+                        )
+                      ),
+                    ),
+
+                    SizedBox(height: 25,),
+
+                    // SMS tushuntirish
+                    Text(
+                      "${textlar[currentIndex]["email_reminder"]}",
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.grey.shade600
+                      ),
+                    ),
+
+                    SizedBox(height: 15,),
+
+                    // Button
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blue.shade700,
+                        fixedSize: Size(400, 50)
+                      ),
+                      onPressed: (){
+                        if(_emailController.text.isNotEmpty){
+                          if(_emailController.text.endsWith("@gmail.com")){
+                            setState(() {
+                              gmail = _emailController.text;
+                            });
+
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Register2()
+                              )
+                            );
+
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                duration: Duration(seconds: 2),
+                                backgroundColor: Colors.red,
+                                content: Text(
+                                  "${textlar[currentIndex]["email_error"]}",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.bold
+                                  ),
+                                  textAlign: TextAlign.center,
+                                )
+                              )
+                            );
+                          }
+                        }
+                      },
+                      child: Text(
+                        "${textlar[currentIndex]["next"]}",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 23
+                        ),
                       )
                     ),
-                  ),
-
-                  SizedBox(height: 25,),
-
-                  // SMS tushuntirish
-                  Text(
-                    "${textlar[currentIndex]["email_reminder"]}",
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.grey.shade600
-                    ),
-                  ),
-
-                  SizedBox(height: 15,),
-
-                  // Button
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue.shade700,
-                      fixedSize: Size(400, 50)
-                    ),
-                    onPressed: (){
-                      if(_emailController.text.isNotEmpty){
-                        if(_emailController.text.endsWith("@gmail.com")){
-                          setState(() {
-                            gmail = _emailController.text;
-                          });
-
-                          Navigator.push(
-                            context, 
-                            MaterialPageRoute(
-                              builder: (context) => Register2()
-                            )
-                          );
-                          
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              duration: Duration(seconds: 2),
-                              backgroundColor: Colors.red,
-                              content: Text(
-                                "${textlar[currentIndex]["email_error"]}",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.bold
-                                ),
-                                textAlign: TextAlign.center,
-                              )
-                            )
-                          );
-                        }
-                      }
-                    },
-                    child: Text(
-                      "${textlar[currentIndex]["next"]}",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 23
-                      ),
-                    )
-                  ),
-                ],
-              ),
-            ),
-
-            // loginga
-            GestureDetector(
-              onTap: (){
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => LoginPage()
-                  )
-                );
-              },
-              child: Text(
-                "${textlar[currentIndex]["loginga"]}",
-                style: TextStyle(
-                  color: Colors.blue,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18
+                  ],
                 ),
               ),
-            )
-          ],
+
+              // loginga
+              GestureDetector(
+                onTap: (){
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LoginPage()
+                    )
+                  );
+                },
+                child: Text(
+                  "${textlar[currentIndex]["loginga"]}",
+                  style: TextStyle(
+                    color: Colors.blue,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -501,131 +504,134 @@ class _Register2State extends State<Register2> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Padding(
-        padding: const EdgeInsets.all(18.0),
-        child: Column(
-          children: [
-            Expanded(
-              child: Column(
-                children: [
-                  // gmail
-                  Text(
-                    "${textlar[currentIndex]["password_question"]}",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 30
+      body: SingleChildScrollView(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+        child: Padding(
+          padding: const EdgeInsets.all(18.0),
+          child: Column(
+            children: [
+              Expanded(
+                child: Column(
+                  children: [
+                    // gmail
+                    Text(
+                      "${textlar[currentIndex]["password_question"]}",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 30
+                      ),
                     ),
-                  ),
 
-                  SizedBox(height: 10,),
+                    SizedBox(height: 10,),
 
-                  // tushuntirish
-                  Text(
-                    "${textlar[currentIndex]["password_explain"]}",
-                    style: TextStyle(
-                        fontSize: 19,
-                        color: Colors.grey.shade800
+                    // tushuntirish
+                    Text(
+                      "${textlar[currentIndex]["password_explain"]}",
+                      style: TextStyle(
+                          fontSize: 19,
+                          color: Colors.grey.shade800
+                      ),
                     ),
-                  ),
 
-                  SizedBox(height: 25,),
+                    SizedBox(height: 25,),
 
-                  // input
-                  TextField(
-                    controller: _passController,
-                    decoration: InputDecoration(
-                        hintText: textlar[currentIndex]["password_hint"],
-                        labelText: textlar[currentIndex]["password_label"],
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15)
+                    // input
+                    TextField(
+                      controller: _passController,
+                      decoration: InputDecoration(
+                          hintText: textlar[currentIndex]["password_hint"],
+                          labelText: textlar[currentIndex]["password_label"],
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15)
+                          )
+                      ),
+                    ),
+
+                    SizedBox(height: 25,),
+
+                    // SMS tushuntirish
+                    Text(
+                      "${textlar[currentIndex]["password_reminder"]}",
+                      style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.grey.shade600
+                      ),
+                    ),
+
+                    SizedBox(height: 15,),
+
+                    // Button
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.blue.shade700,
+                            fixedSize: Size(400, 50)
+                        ),
+                        onPressed: (){
+                          if(_passController.text.isNotEmpty){
+                            if(_passController.text.length >= 8){
+                              setState(() {
+                                password = _passController.text;
+                              });
+
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Register3()
+                                  )
+                              );
+
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                      duration: Duration(seconds: 2),
+                                      backgroundColor: Colors.red,
+                                      content: Text(
+                                        "${textlar[currentIndex]["password_error"]}",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.bold
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      )
+                                  )
+                              );
+                            }
+                          }
+                        },
+                        child: Text(
+                          "${textlar[currentIndex]["next"]}",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 23
+                          ),
                         )
                     ),
-                  ),
-
-                  SizedBox(height: 25,),
-
-                  // SMS tushuntirish
-                  Text(
-                    "${textlar[currentIndex]["password_reminder"]}",
-                    style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.grey.shade600
-                    ),
-                  ),
-
-                  SizedBox(height: 15,),
-
-                  // Button
-                  ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blue.shade700,
-                          fixedSize: Size(400, 50)
-                      ),
-                      onPressed: (){
-                        if(_passController.text.isNotEmpty){
-                          if(_passController.text.length >= 8){
-                            setState(() {
-                              password = _passController.text;
-                            });
-
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Register3()
-                                )
-                            );
-
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                    duration: Duration(seconds: 2),
-                                    backgroundColor: Colors.red,
-                                    content: Text(
-                                      "${textlar[currentIndex]["password_error"]}",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.bold
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    )
-                                )
-                            );
-                          }
-                        }
-                      },
-                      child: Text(
-                        "${textlar[currentIndex]["next"]}",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 23
-                        ),
-                      )
-                  ),
-                ],
-              ),
-            ),
-
-            // loginga
-            GestureDetector(
-              onTap: (){
-                Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => LoginPage()
-                    )
-                );
-              },
-              child: Text(
-                "${textlar[currentIndex]["loginga"]}",
-                style: TextStyle(
-                    color: Colors.blue,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18
+                  ],
                 ),
               ),
-            )
-          ],
+
+              // loginga
+              GestureDetector(
+                onTap: (){
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => LoginPage()
+                      )
+                  );
+                },
+                child: Text(
+                  "${textlar[currentIndex]["loginga"]}",
+                  style: TextStyle(
+                      color: Colors.blue,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -650,128 +656,131 @@ class _Register3State extends State<Register3> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Padding(
-        padding: const EdgeInsets.all(18.0),
-        child: Column(
-          children: [
-            Expanded(
-              child: Column(
-                children: [
-                  // gmail
-                  Text(
-                    "${textlar[currentIndex]["dob_question"]}",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 30
+      body: SingleChildScrollView(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+        child: Padding(
+          padding: const EdgeInsets.all(18.0),
+          child: Column(
+            children: [
+              Expanded(
+                child: Column(
+                  children: [
+                    // gmail
+                    Text(
+                      "${textlar[currentIndex]["dob_question"]}",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 30
+                      ),
                     ),
-                  ),
 
-                  SizedBox(height: 10,),
+                    SizedBox(height: 10,),
 
-                  // tushuntirish
-                  Text(
-                    "${textlar[currentIndex]["dob_explain"]}",
-                    style: TextStyle(
-                        fontSize: 19,
-                        color: Colors.grey.shade800
+                    // tushuntirish
+                    Text(
+                      "${textlar[currentIndex]["dob_explain"]}",
+                      style: TextStyle(
+                          fontSize: 19,
+                          color: Colors.grey.shade800
+                      ),
                     ),
-                  ),
 
-                  SizedBox(height: 25,),
+                    SizedBox(height: 25,),
 
-                  // input
-                  TextField(
-                    controller: _dobController,
-                    decoration: InputDecoration(
-                        hintText: textlar[currentIndex]["dob_hint"],
-                        labelText: textlar[currentIndex]["dob_label"],
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15)
+                    // input
+                    TextField(
+                      controller: _dobController,
+                      decoration: InputDecoration(
+                          hintText: textlar[currentIndex]["dob_hint"],
+                          labelText: textlar[currentIndex]["dob_label"],
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15)
+                          )
+                      ),
+                    ),
+
+                    SizedBox(height: 25,),
+
+                    // SMS tushuntirish
+                    Text(
+                      "${textlar[currentIndex]["dob_reminder"]}",
+                      style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.grey.shade600
+                      ),
+                    ),
+
+                    SizedBox(height: 15,),
+
+                    // Button
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.blue.shade700,
+                            fixedSize: Size(400, 50)
+                        ),
+                        onPressed: (){
+                          if(_dobController.text.isNotEmpty){
+                            setState(() {
+                              dob = _dobController.text;
+                            });
+
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Register4()
+                                )
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                    duration: Duration(seconds: 2),
+                                    backgroundColor: Colors.red,
+                                    content: Text(
+                                      "${textlar[currentIndex]["dob_error"]}",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.bold
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    )
+                                )
+                            );
+                          }
+                        },
+                        child: Text(
+                          "${textlar[currentIndex]["next"]}",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 23
+                          ),
                         )
                     ),
-                  ),
-
-                  SizedBox(height: 25,),
-
-                  // SMS tushuntirish
-                  Text(
-                    "${textlar[currentIndex]["dob_reminder"]}",
-                    style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.grey.shade600
-                    ),
-                  ),
-
-                  SizedBox(height: 15,),
-
-                  // Button
-                  ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blue.shade700,
-                          fixedSize: Size(400, 50)
-                      ),
-                      onPressed: (){
-                        if(_dobController.text.isNotEmpty){
-                          setState(() {
-                            dob = _dobController.text;
-                          });
-
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Register4()
-                              )
-                          );
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                  duration: Duration(seconds: 2),
-                                  backgroundColor: Colors.red,
-                                  content: Text(
-                                    "${textlar[currentIndex]["dob_error"]}",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.bold
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  )
-                              )
-                          );
-                        }
-                      },
-                      child: Text(
-                        "${textlar[currentIndex]["next"]}",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 23
-                        ),
-                      )
-                  ),
-                ],
-              ),
-            ),
-
-            // loginga
-            GestureDetector(
-              onTap: (){
-                Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => LoginPage()
-                    )
-                );
-              },
-              child: Text(
-                "${textlar[currentIndex]["loginga"]}",
-                style: TextStyle(
-                    color: Colors.blue,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18
+                  ],
                 ),
               ),
-            )
-          ],
+
+              // loginga
+              GestureDetector(
+                onTap: (){
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => LoginPage()
+                      )
+                  );
+                },
+                child: Text(
+                  "${textlar[currentIndex]["loginga"]}",
+                  style: TextStyle(
+                      color: Colors.blue,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -797,128 +806,131 @@ class _Register4State extends State<Register4> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Padding(
-        padding: const EdgeInsets.all(18.0),
-        child: Column(
-          children: [
-            Expanded(
-              child: Column(
-                children: [
-                  // gmail
-                  Text(
-                    "${textlar[currentIndex]["name_question"]}",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 30
+      body: SingleChildScrollView(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+        child: Padding(
+          padding: const EdgeInsets.all(18.0),
+          child: Column(
+            children: [
+              Expanded(
+                child: Column(
+                  children: [
+                    // gmail
+                    Text(
+                      "${textlar[currentIndex]["name_question"]}",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 30
+                      ),
                     ),
-                  ),
 
-                  SizedBox(height: 10,),
+                    SizedBox(height: 10,),
 
-                  // tushuntirish
-                  Text(
-                    "${textlar[currentIndex]["name_explain"]}",
-                    style: TextStyle(
-                        fontSize: 19,
-                        color: Colors.grey.shade800
+                    // tushuntirish
+                    Text(
+                      "${textlar[currentIndex]["name_explain"]}",
+                      style: TextStyle(
+                          fontSize: 19,
+                          color: Colors.grey.shade800
+                      ),
                     ),
-                  ),
 
-                  SizedBox(height: 25,),
+                    SizedBox(height: 25,),
 
-                  // input
-                  TextField(
-                    controller: _nameController,
-                    decoration: InputDecoration(
-                        hintText: textlar[currentIndex]["name_hint"],
-                        labelText: textlar[currentIndex]["name_label"],
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15)
+                    // input
+                    TextField(
+                      controller: _nameController,
+                      decoration: InputDecoration(
+                          hintText: textlar[currentIndex]["name_hint"],
+                          labelText: textlar[currentIndex]["name_label"],
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15)
+                          )
+                      ),
+                    ),
+
+                    SizedBox(height: 25,),
+
+                    // SMS tushuntirish
+                    Text(
+                      "${textlar[currentIndex]["name_reminder"]}",
+                      style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.grey.shade600
+                      ),
+                    ),
+
+                    SizedBox(height: 15,),
+
+                    // Button
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.blue.shade700,
+                            fixedSize: Size(400, 50)
+                        ),
+                        onPressed: (){
+                          if(_nameController.text.isNotEmpty){
+                            setState(() {
+                              fullName = _nameController.text;
+                            });
+
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Register5()
+                                )
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                    duration: Duration(seconds: 2),
+                                    backgroundColor: Colors.red,
+                                    content: Text(
+                                      "${textlar[currentIndex]["name_error"]}",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.bold
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    )
+                                )
+                            );
+                          }
+                        },
+                        child: Text(
+                          "${textlar[currentIndex]["next"]}",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 23
+                          ),
                         )
                     ),
-                  ),
-
-                  SizedBox(height: 25,),
-
-                  // SMS tushuntirish
-                  Text(
-                    "${textlar[currentIndex]["name_reminder"]}",
-                    style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.grey.shade600
-                    ),
-                  ),
-
-                  SizedBox(height: 15,),
-
-                  // Button
-                  ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blue.shade700,
-                          fixedSize: Size(400, 50)
-                      ),
-                      onPressed: (){
-                        if(_nameController.text.isNotEmpty){
-                          setState(() {
-                            fullName = _nameController.text;
-                          });
-
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Register5()
-                              )
-                          );
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                  duration: Duration(seconds: 2),
-                                  backgroundColor: Colors.red,
-                                  content: Text(
-                                    "${textlar[currentIndex]["name_error"]}",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.bold
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  )
-                              )
-                          );
-                        }
-                      },
-                      child: Text(
-                        "${textlar[currentIndex]["next"]}",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 23
-                        ),
-                      )
-                  ),
-                ],
-              ),
-            ),
-
-            // loginga
-            GestureDetector(
-              onTap: (){
-                Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => LoginPage()
-                    )
-                );
-              },
-              child: Text(
-                "${textlar[currentIndex]["loginga"]}",
-                style: TextStyle(
-                    color: Colors.blue,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18
+                  ],
                 ),
               ),
-            )
-          ],
+
+              // loginga
+              GestureDetector(
+                onTap: (){
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => LoginPage()
+                      )
+                  );
+                },
+                child: Text(
+                  "${textlar[currentIndex]["loginga"]}",
+                  style: TextStyle(
+                      color: Colors.blue,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -980,126 +992,129 @@ class _Register5State extends State<Register5> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Padding(
-        padding: const EdgeInsets.all(18.0),
-        child: Column(
-          children: [
-            Expanded(
-              child: Column(
-                children: [
-                  // gmail
-                  Text(
-                    "${textlar[currentIndex]["username_question"]}",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 30
+      body: SingleChildScrollView(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+        child: Padding(
+          padding: const EdgeInsets.all(18.0),
+          child: Column(
+            children: [
+              Expanded(
+                child: Column(
+                  children: [
+                    // gmail
+                    Text(
+                      "${textlar[currentIndex]["username_question"]}",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 30
+                      ),
                     ),
-                  ),
 
-                  SizedBox(height: 10,),
+                    SizedBox(height: 10,),
 
-                  // tushuntirish
-                  Text(
-                    "${textlar[currentIndex]["username_explain"]}",
-                    style: TextStyle(
-                        fontSize: 19,
-                        color: Colors.grey.shade800
+                    // tushuntirish
+                    Text(
+                      "${textlar[currentIndex]["username_explain"]}",
+                      style: TextStyle(
+                          fontSize: 19,
+                          color: Colors.grey.shade800
+                      ),
                     ),
-                  ),
 
-                  SizedBox(height: 25,),
+                    SizedBox(height: 25,),
 
-                  // input
-                  TextField(
-                    controller: _usernameController,
-                    decoration: InputDecoration(
-                        hintText: textlar[currentIndex]["username_hint"],
-                        labelText: textlar[currentIndex]["username_label"],
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15)
+                    // input
+                    TextField(
+                      controller: _usernameController,
+                      decoration: InputDecoration(
+                          hintText: textlar[currentIndex]["username_hint"],
+                          labelText: textlar[currentIndex]["username_label"],
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15)
+                          )
+                      ),
+                    ),
+
+                    SizedBox(height: 25,),
+
+                    // SMS tushuntirish
+                    Text(
+                      "${textlar[currentIndex]["username_reminder"]}",
+                      style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.grey.shade600
+                      ),
+                    ),
+
+                    SizedBox(height: 15,),
+
+                    // Button
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.blue.shade700,
+                            fixedSize: Size(400, 50)
+                        ),
+                        onPressed: () async {
+                          if(_usernameController.text.isNotEmpty){
+                            if(_usernameController.text.length >= 4){
+                              setState(() {
+                                username = _usernameController.text;
+                              });
+
+                              register();
+
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                      duration: Duration(seconds: 2),
+                                      backgroundColor: Colors.red,
+                                      content: Text(
+                                        "${textlar[currentIndex]["username_error"]}",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.bold
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      )
+                                  )
+                              );
+                            }
+                          }
+                        },
+                        child: Text(
+                          "${textlar[currentIndex]["next"]}",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 23
+                          ),
                         )
                     ),
-                  ),
-
-                  SizedBox(height: 25,),
-
-                  // SMS tushuntirish
-                  Text(
-                    "${textlar[currentIndex]["username_reminder"]}",
-                    style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.grey.shade600
-                    ),
-                  ),
-
-                  SizedBox(height: 15,),
-
-                  // Button
-                  ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blue.shade700,
-                          fixedSize: Size(400, 50)
-                      ),
-                      onPressed: () async {
-                        if(_usernameController.text.isNotEmpty){
-                          if(_usernameController.text.length >= 4){
-                            setState(() {
-                              username = _usernameController.text;
-                            });
-
-                            register();
-
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                    duration: Duration(seconds: 2),
-                                    backgroundColor: Colors.red,
-                                    content: Text(
-                                      "${textlar[currentIndex]["username_error"]}",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.bold
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    )
-                                )
-                            );
-                          }
-                        }
-                      },
-                      child: Text(
-                        "${textlar[currentIndex]["next"]}",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 23
-                        ),
-                      )
-                  ),
-                ],
-              ),
-            ),
-
-            // loginga
-            GestureDetector(
-              onTap: (){
-                Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => LoginPage()
-                    )
-                );
-              },
-              child: Text(
-                "${textlar[currentIndex]["loginga"]}",
-                style: TextStyle(
-                    color: Colors.blue,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18
+                  ],
                 ),
               ),
-            )
-          ],
+
+              // loginga
+              GestureDetector(
+                onTap: (){
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => LoginPage()
+                      )
+                  );
+                },
+                child: Text(
+                  "${textlar[currentIndex]["loginga"]}",
+                  style: TextStyle(
+                      color: Colors.blue,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
