@@ -42,6 +42,7 @@ dependencies:
   firebase_storage: ^13.0.6
   video_player: ^2.10.1
   intl: ^0.20.2
+  audioplayers: ^5.2.1
   
 
 dev_dependencies:
@@ -80,6 +81,9 @@ flutter:
      - assets/messi.mp4
      - assets/neymar.mp4
      - assets/bape.mp4
+     - assets/ruschaekan.jpg
+     - assets/profile.png
+     - assets/audio.mp3
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

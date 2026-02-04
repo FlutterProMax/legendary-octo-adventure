@@ -203,14 +203,14 @@ class _ReelsPageState extends State<ReelsPage> {
               ),
 
               Positioned(
-                right: 16,
+                right: 7,
                 bottom: 80,
                 child: Column(
                   children: [
                     // like
                     Icon(
-                      Icons.thumb_up,
-                      size: 28,
+                      Icons.favorite,
+                      size: 34,
                       color: Colors.white,
                     ),
                     Text(
@@ -229,6 +229,17 @@ class _ReelsPageState extends State<ReelsPage> {
                       Icons.thumb_down,
                       size: 28,
                       color: Colors.white,
+                    ),
+
+                    SizedBox(height: 7),
+
+                    Text(
+                      "Dislike",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17
+                      ),
                     ),
 
                     SizedBox(height: 23),
@@ -256,6 +267,17 @@ class _ReelsPageState extends State<ReelsPage> {
                       Icons.share,
                       size: 28,
                       color: Colors.white,
+                    ),
+
+                    SizedBox(height: 7),
+
+                    Text(
+                      "Share",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17
+                      ),
                     ),
                   ],
                 )

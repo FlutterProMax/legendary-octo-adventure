@@ -352,111 +352,110 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
 
       body: SingleChildScrollView(
-        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Padding(
           padding: const EdgeInsets.all(18.0),
           child: Column(
             children: [
-              Expanded(
-                child: Column(
-                  children: [
-                    // gmail
-                    Text(
-                      "${textlar[currentIndex]["email_question"]}",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 30
-                      ),
+              Column(
+                children: [
+                  // gmail
+                  Text(
+                    "${textlar[currentIndex]["email_question"]}",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30
                     ),
+                  ),
 
-                    SizedBox(height: 10,),
+                  SizedBox(height: 10,),
 
-                    // tushuntirish
-                    Text(
-                        "${textlar[currentIndex]["email_explain"]}",
-                      style: TextStyle(
-                        fontSize: 19,
-                        color: Colors.grey.shade800
-                      ),
+                  // tushuntirish
+                  Text(
+                      "${textlar[currentIndex]["email_explain"]}",
+                    style: TextStyle(
+                      fontSize: 19,
+                      color: Colors.grey.shade800
                     ),
+                  ),
 
-                    SizedBox(height: 25,),
+                  SizedBox(height: 25,),
 
-                    // input
-                    TextField(
-                      controller: _emailController,
-                      decoration: InputDecoration(
-                        hintText: textlar[currentIndex]["email_hint"],
-                        labelText: textlar[currentIndex]["email_label"],
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15)
-                        )
-                      ),
-                    ),
-
-                    SizedBox(height: 25,),
-
-                    // SMS tushuntirish
-                    Text(
-                      "${textlar[currentIndex]["email_reminder"]}",
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.grey.shade600
-                      ),
-                    ),
-
-                    SizedBox(height: 15,),
-
-                    // Button
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue.shade700,
-                        fixedSize: Size(400, 50)
-                      ),
-                      onPressed: (){
-                        if(_emailController.text.isNotEmpty){
-                          if(_emailController.text.endsWith("@gmail.com")){
-                            setState(() {
-                              gmail = _emailController.text;
-                            });
-
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Register2()
-                              )
-                            );
-
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                duration: Duration(seconds: 2),
-                                backgroundColor: Colors.red,
-                                content: Text(
-                                  "${textlar[currentIndex]["email_error"]}",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.bold
-                                  ),
-                                  textAlign: TextAlign.center,
-                                )
-                              )
-                            );
-                          }
-                        }
-                      },
-                      child: Text(
-                        "${textlar[currentIndex]["next"]}",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 23
-                        ),
+                  // input
+                  TextField(
+                    controller: _emailController,
+                    decoration: InputDecoration(
+                      hintText: textlar[currentIndex]["email_hint"],
+                      labelText: textlar[currentIndex]["email_label"],
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15)
                       )
                     ),
-                  ],
-                ),
+                  ),
+
+                  SizedBox(height: 25,),
+
+                  // SMS tushuntirish
+                  Text(
+                    "${textlar[currentIndex]["email_reminder"]}",
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.grey.shade600
+                    ),
+                  ),
+
+                  SizedBox(height: 15,),
+
+                  // Button
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue.shade700,
+                      fixedSize: Size(400, 50)
+                    ),
+                    onPressed: (){
+                      if(_emailController.text.isNotEmpty){
+                        if(_emailController.text.endsWith("@gmail.com")){
+                          setState(() {
+                            gmail = _emailController.text;
+                          });
+
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Register2()
+                            )
+                          );
+
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              duration: Duration(seconds: 2),
+                              backgroundColor: Colors.red,
+                              content: Text(
+                                "${textlar[currentIndex]["email_error"]}",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.bold
+                                ),
+                                textAlign: TextAlign.center,
+                              )
+                            )
+                          );
+                        }
+                      }
+                    },
+                    child: Text(
+                      "${textlar[currentIndex]["next"]}",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 23
+                      ),
+                    )
+                  ),
+                ],
               ),
+
+              SizedBox(height: 35),
 
               // loginga
               GestureDetector(
@@ -471,6 +470,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: Text(
                   "${textlar[currentIndex]["loginga"]}",
                   style: TextStyle(
+                    decoration: TextDecoration.underline,
                     color: Colors.blue,
                     fontWeight: FontWeight.bold,
                     fontSize: 18
@@ -503,15 +503,15 @@ class _Register2State extends State<Register2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(),
-      body: SingleChildScrollView(
-        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-        child: Padding(
-          padding: const EdgeInsets.all(18.0),
-          child: Column(
-            children: [
-              Expanded(
-                child: Column(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(18.0),
+            child: Column(
+              children: [
+                Column(
                   children: [
                     // gmail
                     Text(
@@ -521,9 +521,9 @@ class _Register2State extends State<Register2> {
                           fontSize: 30
                       ),
                     ),
-
+        
                     SizedBox(height: 10,),
-
+        
                     // tushuntirish
                     Text(
                       "${textlar[currentIndex]["password_explain"]}",
@@ -532,9 +532,9 @@ class _Register2State extends State<Register2> {
                           color: Colors.grey.shade800
                       ),
                     ),
-
+        
                     SizedBox(height: 25,),
-
+        
                     // input
                     TextField(
                       controller: _passController,
@@ -546,9 +546,9 @@ class _Register2State extends State<Register2> {
                           )
                       ),
                     ),
-
+        
                     SizedBox(height: 25,),
-
+        
                     // SMS tushuntirish
                     Text(
                       "${textlar[currentIndex]["password_reminder"]}",
@@ -557,9 +557,9 @@ class _Register2State extends State<Register2> {
                           color: Colors.grey.shade600
                       ),
                     ),
-
+        
                     SizedBox(height: 15,),
-
+        
                     // Button
                     ElevatedButton(
                         style: ElevatedButton.styleFrom(
@@ -572,14 +572,14 @@ class _Register2State extends State<Register2> {
                               setState(() {
                                 password = _passController.text;
                               });
-
+        
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => Register3()
                                   )
                               );
-
+        
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
@@ -609,28 +609,31 @@ class _Register2State extends State<Register2> {
                     ),
                   ],
                 ),
-              ),
-
-              // loginga
-              GestureDetector(
-                onTap: (){
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => LoginPage()
-                      )
-                  );
-                },
-                child: Text(
-                  "${textlar[currentIndex]["loginga"]}",
-                  style: TextStyle(
-                      color: Colors.blue,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18
+        
+                SizedBox(height: 35),
+        
+                // loginga
+                GestureDetector(
+                  onTap: (){
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => LoginPage()
+                        )
+                    );
+                  },
+                  child: Text(
+                    "${textlar[currentIndex]["loginga"]}",
+                    style: TextStyle(
+                        decoration: TextDecoration.underline,
+                        color: Colors.blue,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18
+                    ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -655,15 +658,15 @@ class _Register3State extends State<Register3> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(),
-      body: SingleChildScrollView(
-        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-        child: Padding(
-          padding: const EdgeInsets.all(18.0),
-          child: Column(
-            children: [
-              Expanded(
-                child: Column(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(18.0),
+            child: Column(
+              children: [
+                Column(
                   children: [
                     // gmail
                     Text(
@@ -758,28 +761,31 @@ class _Register3State extends State<Register3> {
                     ),
                   ],
                 ),
-              ),
 
-              // loginga
-              GestureDetector(
-                onTap: (){
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => LoginPage()
-                      )
-                  );
-                },
-                child: Text(
-                  "${textlar[currentIndex]["loginga"]}",
-                  style: TextStyle(
-                      color: Colors.blue,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18
+                SizedBox(height: 35),
+
+                // loginga
+                GestureDetector(
+                  onTap: (){
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => LoginPage()
+                        )
+                    );
+                  },
+                  child: Text(
+                    "${textlar[currentIndex]["loginga"]}",
+                    style: TextStyle(
+                        decoration: TextDecoration.underline,
+                        color: Colors.blue,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18
+                    ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -805,15 +811,15 @@ class _Register4State extends State<Register4> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(),
-      body: SingleChildScrollView(
-        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-        child: Padding(
-          padding: const EdgeInsets.all(18.0),
-          child: Column(
-            children: [
-              Expanded(
-                child: Column(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(18.0),
+            child: Column(
+              children: [
+                Column(
                   children: [
                     // gmail
                     Text(
@@ -908,28 +914,31 @@ class _Register4State extends State<Register4> {
                     ),
                   ],
                 ),
-              ),
 
-              // loginga
-              GestureDetector(
-                onTap: (){
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => LoginPage()
-                      )
-                  );
-                },
-                child: Text(
-                  "${textlar[currentIndex]["loginga"]}",
-                  style: TextStyle(
-                      color: Colors.blue,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18
+                SizedBox(height: 35),
+
+                // loginga
+                GestureDetector(
+                  onTap: (){
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => LoginPage()
+                        )
+                    );
+                  },
+                  child: Text(
+                    "${textlar[currentIndex]["loginga"]}",
+                    style: TextStyle(
+                        decoration: TextDecoration.underline,
+                        color: Colors.blue,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18
+                    ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -960,6 +969,7 @@ class _Register5State extends State<Register5> {
 
       // sharedpref'ga ulash
       SharedPreferences preferences = await SharedPreferences.getInstance();
+      await preferences.setString("username", username);
       await preferences.setBool("isAuthenticated", true);
 
       Navigator.pushReplacement(
@@ -991,15 +1001,15 @@ class _Register5State extends State<Register5> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(),
-      body: SingleChildScrollView(
-        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-        child: Padding(
-          padding: const EdgeInsets.all(18.0),
-          child: Column(
-            children: [
-              Expanded(
-                child: Column(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(18.0),
+            child: Column(
+              children: [
+                Column(
                   children: [
                     // gmail
                     Text(
@@ -1009,9 +1019,9 @@ class _Register5State extends State<Register5> {
                           fontSize: 30
                       ),
                     ),
-
+        
                     SizedBox(height: 10,),
-
+        
                     // tushuntirish
                     Text(
                       "${textlar[currentIndex]["username_explain"]}",
@@ -1020,9 +1030,9 @@ class _Register5State extends State<Register5> {
                           color: Colors.grey.shade800
                       ),
                     ),
-
+        
                     SizedBox(height: 25,),
-
+        
                     // input
                     TextField(
                       controller: _usernameController,
@@ -1034,9 +1044,9 @@ class _Register5State extends State<Register5> {
                           )
                       ),
                     ),
-
+        
                     SizedBox(height: 25,),
-
+        
                     // SMS tushuntirish
                     Text(
                       "${textlar[currentIndex]["username_reminder"]}",
@@ -1045,9 +1055,9 @@ class _Register5State extends State<Register5> {
                           color: Colors.grey.shade600
                       ),
                     ),
-
+        
                     SizedBox(height: 15,),
-
+        
                     // Button
                     ElevatedButton(
                         style: ElevatedButton.styleFrom(
@@ -1060,9 +1070,9 @@ class _Register5State extends State<Register5> {
                               setState(() {
                                 username = _usernameController.text;
                               });
-
+        
                               register();
-
+        
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
@@ -1092,28 +1102,31 @@ class _Register5State extends State<Register5> {
                     ),
                   ],
                 ),
-              ),
-
-              // loginga
-              GestureDetector(
-                onTap: (){
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => LoginPage()
-                      )
-                  );
-                },
-                child: Text(
-                  "${textlar[currentIndex]["loginga"]}",
-                  style: TextStyle(
-                      color: Colors.blue,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18
+        
+                SizedBox(height: 35),
+        
+                // loginga
+                GestureDetector(
+                  onTap: (){
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => LoginPage()
+                        )
+                    );
+                  },
+                  child: Text(
+                    "${textlar[currentIndex]["loginga"]}",
+                    style: TextStyle(
+                        decoration: TextDecoration.underline,
+                        color: Colors.blue,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18
+                    ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
       ),
